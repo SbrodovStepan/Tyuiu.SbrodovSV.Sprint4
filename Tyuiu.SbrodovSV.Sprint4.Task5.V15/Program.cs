@@ -3,51 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tyuiu.SbrodovSV.Sprint4.Task2.V24.Lib;
+using Tyuiu.SbrodovSV.Sprint4.Task5.V15.Lib;
 
-namespace Tyuiu.SbrodovSV.Sprint4.Task2.V24
+namespace Tyuiu.SbrodovSV.Sprint4.Task5.V15
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
+            Random rnd = new Random();
             DataService dataService = new DataService();
 
             Console.Title = "Спринт #4 | Выполнил: Сбродов С. В. | АСОиУб-23-2";
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* Спринт #4                                                               *");
             Console.WriteLine("* Тема: Обработка структурных типов                                       *");
-            Console.WriteLine("* Задание #2                                                              *");
-            Console.WriteLine("* Вариант #24                                                             *");
+            Console.WriteLine("* Задание #3                                                              *");
+            Console.WriteLine("* Вариант #6                                                              *");
             Console.WriteLine("* Выполнил: Сбродов Степан Владимирович | АСОиУб-23-2                     *");
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* УСЛОВИЕ:                                                                *");
-            Console.WriteLine("* Дан одномерный целочисленный массив на 12 элементов заполненный         *");
-            Console.WriteLine("* случайными в диапазоне от 4 до 9 подсчитать сумму нечетных элементов    *");
-            Console.WriteLine("* массива.                                                                *");
+            Console.WriteLine("* Дан двумерный целочисленный массив 5 на 5 элементов, заполненный        *");
+            Console.WriteLine("* статическими значениями в диапазоне от 3 до 8. Найдите максимальный     *");
+            Console.WriteLine("* элемент во второй строке массива.                                       *");
             Console.WriteLine("*                                                                         *");
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                        *");
             Console.WriteLine("***************************************************************************");
 
-            Console.Write("Введите длину массива: ");
-            int len = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Введите количество строк в массиве: ");
+            int rows = Convert.ToInt32(Console.ReadLine());
 
-            int[] numsArray = new int[len];
+            Console.Write("Введите количество столбцов в массиве: ");
+            int columns = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 0; i < len; i++)
+            int[,] numsArray = new int[rows, columns];
+
+            Console.WriteLine("***************************************************************************");
+
+            for (int i = 0; i < rows; i++)
             {
-                numsArray[i] = random.Next(4,10);
+                for (int j = 0; j < columns; j++)
+                {
+                    numsArray[i, j] = rnd.Next(-6, 4);
+                }
             }
 
-            Console.WriteLine();
-
-            Console.Write("Массив: {");
-            for (int i = 0; i < numsArray.Length; i++)
+            Console.Write("Массив:{ ");
+            for (int i = 0; i < numsArray.GetUpperBound(0) + 1; i++)
             {
-                Console.Write(numsArray[i]);
-                if (i != numsArray.Length - 1) { Console.Write(", "); }
+                if (i != 0) { Console.Write("\t "); }
+                Console.Write("{");
+                for (int j = 0; j < numsArray.Length / (numsArray.GetUpperBound(0) + 1); j++)
+                {
+                    Console.Write(numsArray[i, j]);
+                    if (j != numsArray.GetLength(0) - 1) { Console.Write(", "); }
+                }
+                Console.Write("}");
+                if (i != numsArray.GetLength(0) - 1) { Console.WriteLine(","); }
             }
             Console.WriteLine("}");
 
